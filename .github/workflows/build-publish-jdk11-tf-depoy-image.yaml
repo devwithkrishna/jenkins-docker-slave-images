@@ -30,7 +30,7 @@ jobs:
         with:
           file: jdk-11/dind/Dockerfile
           load: true
-          push: true
+          push: false
           platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk11-image:latest
@@ -40,6 +40,15 @@ jobs:
 
       - name: Get software versions
         run: bash get_software_versions.sh
+
+      - name: Build and docker image with latest tag
+        uses: docker/build-push-action@v6
+        with:
+          file: jdk-11/dind/Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk11-image:latest
 
       - name: Build and docker image with tag
         uses: docker/build-push-action@v6
