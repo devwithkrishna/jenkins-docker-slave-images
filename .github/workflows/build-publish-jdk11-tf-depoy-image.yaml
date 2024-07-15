@@ -43,7 +43,7 @@ jobs:
       - name: Build and docker image with latest tag
         uses: docker/build-push-action@v5
         with:
-          file: jdk-11/dind/Dockerfile
+          file: jdk-11/tf-deploy/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
@@ -52,7 +52,7 @@ jobs:
       - name: Build wand docker image with tag
         uses: docker/build-push-action@v6
         with:
-          file: jdk-11/dind/Dockerfile
+          file: jdk-11/tf-deploy/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
