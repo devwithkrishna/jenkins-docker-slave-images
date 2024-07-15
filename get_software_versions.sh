@@ -36,6 +36,11 @@ extract_terraform_version() {
     fi
 }
 
+terraform --version >> terraform-version.txt
+
+az --version >> az-version.txt
+
+
 # Check for the existence of the files and execute corresponding functions
 if [[ -f "docker-version.txt" ]]; then
     extract_docker_version
