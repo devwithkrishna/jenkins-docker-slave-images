@@ -1,0 +1,58 @@
+name: build-publish-jdk11-dind-image
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 10 17 * *' # morning 10:30 am on 17th of every month
+
+run-name: build-publish-jdk11-dind-image
+jobs:
+  build-publish-jdk11-dind-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and docker image with tag
+        uses: docker/build-push-action@v6
+        with:
+          file: jdk-11/dind/Dockerfile
+          load: true
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-dind-jdk11-image:latest
+
+      - name: List files
+        run: ls -la
+
+      - name: Get software versions
+        run: bash get_software_versions.sh
+
+      - name: Build and docker image with tag
+        uses: docker/build-push-action@v6
+        with:
+          file: jdk-11/dind/Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-dind-jdk11-image:docker_${{ env.DOCKER_VERSION }}_AZ${{ env.AZ_CLI_VERSION }}
+
+      - name: set up docker and scan docker image for vulnerabilities
+        uses: docker-practice/actions-setup-docker@master
+      - run: |
+          set -x
+          docker version
+          docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-dind-jdk11-image:latest
