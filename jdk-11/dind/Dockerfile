@@ -7,7 +7,7 @@ LABEL authors="githubofkrishnadhas"
 # Root user
 USER root
 
-# Install basic packages
+# Install Docker & basic packages
 RUN apt-get update && \
     apt-get install -y -qq \
     ca-certificates \
@@ -17,10 +17,9 @@ RUN apt-get update && \
     apt-transport-https \
     lsb-release \
     gnupg \
-    software-properties-common \
-
-# Install Docker
-RUN install -m 0755 -d /etc/apt/keyrings && \
+    git \
+    software-properties-common && \
+    install -m 0755 -d /etc/apt/keyrings && \
     curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc && \
     chmod a+r /etc/apt/keyrings/docker.asc && \
     echo \
