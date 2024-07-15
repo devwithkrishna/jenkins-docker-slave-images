@@ -57,7 +57,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-dind-jdk11-image:docker_${{ env.DOCKER_VERSION }}_AZ${{ env.AZ_CLI_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-dind-jdk11-image:docker_${{ env.DOCKER_VERSION }}_az_${{ env.AZ_CLI_VERSION }}
 
       - name: set up docker and scan docker image for vulnerabilities
         uses: docker-practice/actions-setup-docker@master

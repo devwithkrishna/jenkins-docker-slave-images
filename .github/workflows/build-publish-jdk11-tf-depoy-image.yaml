@@ -26,7 +26,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and docker image with tag
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v5
         with:
           file: jdk-11/dind/Dockerfile
           load: true
@@ -42,7 +42,7 @@ jobs:
         run: bash get_software_versions.sh
 
       - name: Build and docker image with latest tag
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v5
         with:
           file: jdk-11/dind/Dockerfile
           push: true
@@ -57,7 +57,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk11-image:tf_${{ env.TERRAFORM_VERSION }}_AZ${{ env.AZ_CLI_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk11-image:tf_${{ env.TERRAFORM_VERSION }}_az_${{ env.AZ_CLI_VERSION }}
 
       - name: set up docker and scan docker image for vulnerabilities
         uses: docker-practice/actions-setup-docker@master
