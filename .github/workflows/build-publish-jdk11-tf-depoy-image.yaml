@@ -28,7 +28,7 @@ jobs:
       - name: Build and docker image with tag
         uses: docker/build-push-action@v5
         with:
-          file: jdk-11/dind/Dockerfile
+          file: jdk-11/tf-deploy/Dockerfile
           load: true
           push: false
           tags: |
