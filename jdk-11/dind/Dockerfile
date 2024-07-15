@@ -19,7 +19,7 @@ RUN apt-get update && \
     gnupg \
     git \
     software-properties-common && \
-    install -m 0755 -d /etc/apt/keyrings && \
+    mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc && \
     chmod a+r /etc/apt/keyrings/docker.asc && \
     echo \
@@ -27,29 +27,25 @@ RUN apt-get update && \
     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
     tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     apt-get update && \
-    apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    apt-get install -y -qq \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose
 
 # Get Docker version
 RUN docker --version >> docker-version.txt
 
-# Install azure cli latest avaialble version
-RUN apt-get update -y && \
-    mkdir -p /etc/apt/keyrings && \
+# Install Azure CLI latest available version
+RUN mkdir -p /etc/apt/keyrings && \
     curl -sLS https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/keyrings/microsoft.gpg > /dev/null && \
     chmod go+r /etc/apt/keyrings/microsoft.gpg && \
     AZ_DIST=$(lsb_release -cs) && \
-    echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_DIST main" | tee /etc/apt/sources.list.d/azure-cli.list && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_DIST main" | \
+    tee /etc/apt/sources.list.d/azure-cli.list > /dev/null && \
     apt-get update && \
-    apt-get install azure-cli -y
+    apt-get install -y -qq azure-cli
 
-# Get Azure cli version
+# Get Azure CLI version
 RUN az --version >> az-version.txt
-
-
-
-
-
-
-
-
-
