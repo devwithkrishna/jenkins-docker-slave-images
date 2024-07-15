@@ -40,6 +40,11 @@ jobs:
       - name: Get software versions
         run: bash get_software_versions.sh
 
+      - name: print env vars
+        run: |
+          echo ${{ env.TF_VERSION }}
+          echo ${{ env.AZ_CLI_VERSION }}
+
       - name: Build and docker image with latest tag
         uses: docker/build-push-action@v5
         with:
