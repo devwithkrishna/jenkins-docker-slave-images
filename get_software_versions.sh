@@ -40,6 +40,8 @@ terraform --version >> terraform-version.txt
 
 az --version >> az-version.txt
 
+docker --version >> docker-version.txt
+
 
 # Check for the existence of the files and execute corresponding functions
 if [[ -f "docker-version.txt" ]]; then
