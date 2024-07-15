@@ -8,7 +8,7 @@ LABEL authors="githubofkrishnadhas"
 USER root
 
 # Install basic packages
-RUN apt-get update -q && \
+RUN apt-get update && \
     apt-get install -y -qq \
     ca-certificates \
     curl \
