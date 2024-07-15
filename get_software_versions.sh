@@ -26,7 +26,7 @@ extract_azure_cli_version() {
 
 # Function to extract Terraform version
 extract_terraform_version() {
-    local file="terrraform-version.txt"
+    local file="terraform-version.txt"
     if [[ -f "$file" ]]; then
         local TERRAFORM_VERSION=$(terraform --version | grep -o 'Terraform v[0-9.]*' | awk '{print $2}')
         echo "TERRAFORM_VERSION=$TERRAFORM_VERSION" >> "$GITHUB_ENV"
