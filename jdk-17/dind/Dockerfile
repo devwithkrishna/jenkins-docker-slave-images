@@ -1,5 +1,5 @@
-# Using jenkins/inbound-agent:latest-jdk11 as base image
-FROM jenkins/inbound-agent:latest-jdk11
+# Using jenkins/inbound-agent:latest-jdk17 as base image
+FROM jenkins/inbound-agent:latest-jdk17
 
 # Add label
 LABEL authors="githubofkrishnadhas"
@@ -43,3 +43,4 @@ RUN mkdir -p /etc/apt/keyrings && \
     tee /etc/apt/sources.list.d/azure-cli.list > /dev/null && \
     apt-get update && \
     apt-get install -y -qq azure-cli
+

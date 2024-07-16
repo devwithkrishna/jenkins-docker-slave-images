@@ -1,5 +1,5 @@
 # Jenkins inbound agent as base image
-FROM jenkins/inbound-agent:latest-jdk11
+FROM jenkins/inbound-agent:latest-jdk17
 
 # Root user for installations
 USER root
@@ -15,6 +15,7 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
     echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list && \
     apt-get update -y && apt-get install terraform -y && terraform --version
 
+
 # install azure cli latest avaialble version - https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
 RUN apt-get update -y && \
     mkdir -p /etc/apt/keyrings && \
@@ -24,4 +25,3 @@ RUN apt-get update -y && \
     echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_DIST main" | tee /etc/apt/sources.list.d/azure-cli.list && \
     apt-get update && \
     apt-get install azure-cli -y
-

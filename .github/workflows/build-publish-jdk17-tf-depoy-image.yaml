@@ -1,12 +1,12 @@
-name: build-publish-jdk11-tf-deploy-image
+name: build-publish-jdk17-tf-deploy-image
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 11 17 * *' # morning 11:00 am on 17th of every month
+    - cron: '0 12 17 * *' # morning 12:00 pm on 17th of every month
 
-run-name: build-publish-jdk11-tf-deploy-image
+run-name: build-publish-jdk17-tf-deploy-image
 jobs:
-  build-publish-jdk11-tf-deploy-image:
+  build-publish-jdk17-tf-deploy-image:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,11 +28,11 @@ jobs:
       - name: Build and docker image with tag
         uses: docker/build-push-action@v5
         with:
-          file: jdk-11/tf-deploy/Dockerfile
+          file: jdk-17/tf-deploy/Dockerfile
           load: true
           push: false
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk11-image:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk17-image:latest
 
       - name: List files
         run: ls -la
@@ -43,11 +43,11 @@ jobs:
       - name: Build and docker image with latest tag
         uses: docker/build-push-action@v5
         with:
-          file: jdk-11/tf-deploy/Dockerfile
+          file: jdk-17/tf-deploy/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk11-image:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk17-image:latest
 
       - name: Build wand docker image with tag
         uses: docker/build-push-action@v6
@@ -56,7 +56,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk11-image:tf_${{ env.TERRAFORM_VERSION }}_az_${{ env.AZ_CLI_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk17-image:tf_${{ env.TERRAFORM_VERSION }}_az_${{ env.AZ_CLI_VERSION }}
 
       - name: set up docker and scan docker image for vulnerabilities
         uses: docker-practice/actions-setup-docker@master
