@@ -4,7 +4,7 @@
 extract_docker_version() {
     local file="docker-version.txt"
     if [[ -f "$file" ]]; then
-        local DOCKER_VERSION=$(grep -i 'docker version' "$file" | awk '{print $3}')
+        local DOCKER_VERSION=$(grep -i 'docker version' "$file" | awk '{print $3}' | tr -d ',')
         echo "DOCKER_VERSION=$DOCKER_VERSION" >> "$GITHUB_ENV"
         echo "Set DOCKER_VERSION=$DOCKER_VERSION in GitHub environment"
     else
