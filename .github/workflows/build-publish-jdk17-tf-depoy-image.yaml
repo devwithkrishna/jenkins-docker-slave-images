@@ -63,4 +63,4 @@ jobs:
       - run: |
           set -x
           docker version
-          docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk11-image:latest
+          docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image ${{ secrets.DOCKERHUB_USERNAME }}/jenkins-slave-tf-deploy-jdk17-image:latest
