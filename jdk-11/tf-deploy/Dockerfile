@@ -8,7 +8,7 @@ USER root
 RUN apt-get update -y && apt-get upgrade -y
 
 # install basic packages
- RUN apt-get install -y git openssh-server ca-certificates curl apt-transport-https lsb-release gnupg wget software-properties-common
+RUN apt-get install -y git openssh-server ca-certificates curl apt-transport-https lsb-release gnupg wget software-properties-common
 
 # Install terraform - https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg && \
