@@ -65,7 +65,7 @@ RUN curl https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VER
     ./configure --enable-optimizations && \
     make -j $(nproc) && \
     make altinstall && \
-    && update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python${PYTHON_VERSION} 1 \
+    update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python${PYTHON_VERSION} 1 \
     && update-alternatives --install /usr/bin/pip3 pip /usr/local/bin/pip${PYTHON_VERSION} 1 \
     && pip install --no-cache-dir --upgrade pip \
     && pip install poetry pipenv \
