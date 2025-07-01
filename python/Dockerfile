@@ -72,7 +72,7 @@ RUN curl https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VER
     && cd .. \
     && rm -rf Python-${PYTHON_VERSION} Python-${PYTHON_VERSION}.tgz \
     && rm -rf Python-${PYTHON_VERSION} \
-    && apt-get remove -y --purge build-essential\
+    && apt-get remove -y --purge build-essential \
     libncursesw5-dev \
     libreadline-dev \
     libssl-dev \
