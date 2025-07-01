@@ -10,6 +10,8 @@
 [![build-publish-jdk21-dind-image](https://github.com/devwithkrishna/jenkins-docker-slave-images/actions/workflows/build-publish-jdk21-dind-image.yaml/badge.svg)](https://github.com/devwithkrishna/jenkins-docker-slave-images/actions/workflows/build-publish-jdk21-dind-image.yaml)
 [![build-publish-jdk21-tf-deploy-image](https://github.com/devwithkrishna/jenkins-docker-slave-images/actions/workflows/build-publish-jdk21-tf-depoy-image.yaml/badge.svg)](https://github.com/devwithkrishna/jenkins-docker-slave-images/actions/workflows/build-publish-jdk21-tf-depoy-image.yaml)
 
+[![build-publish-python-deploy-image](https://github.com/devwithkrishna/jenkins-docker-slave-images/actions/workflows/build-publish-jdk21-python-image.yaml/badge.svg)](https://github.com/devwithkrishna/jenkins-docker-slave-images/actions/workflows/build-publish-jdk21-python-image.yaml)
+
 ![Github stars](https://badgen.net/github/stars/devwithkrishna/jenkins-docker-slave-images?icon=github&label=stars)
 ![Github forks](https://badgen.net/github/forks/devwithkrishna/jenkins-docker-slave-images?icon=github&label=forks)
 ![Github issues](https://img.shields.io/github/issues/devwithkrishna/jenkins-docker-slave-images)
